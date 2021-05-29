@@ -1,0 +1,28 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "stress_lib",
+    srcs = [
+        "answer_load_gen.go",
+        "hint_load_gen.go",
+        "key_update_load_gen.go",
+        "loadtype_enumer.go",
+        "stress.go",
+        "user_load_gen.go",
+    ],
+    importpath = "checklist/cmd/stress",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//driver",
+        "//pir",
+        "//updatable",
+        "@com_github_paulbellamy_ratecounter//:ratecounter",
+        "@com_github_zserge_metric//:metric",
+    ],
+)
+
+go_binary(
+    name = "stress",
+    embed = [":stress_lib"],
+    visibility = ["//visibility:public"],
+)

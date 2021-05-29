@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "rpc",
+    srcs = [
+        "client.go",
+        "serialization.go",
+        "server.go",
+    ],
+    importpath = "checklist/rpc",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_rocketlaunchr_https_go//:https-go",
+        "@com_github_ugorji_go_codec//:codec",
+    ],
+)

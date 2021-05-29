@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "dpf-go_lib",
+    srcs = ["dpf_main.go"],
+    importpath = "checklist/modules/dpf-go",
+    visibility = ["//visibility:private"],
+    deps = ["//modules/dpf-go/dpf:dpf"],
+)
+
+go_binary(
+    name = "dpf-go",
+    embed = [":dpf-go_lib"],
+    visibility = ["//visibility:public"],
+)

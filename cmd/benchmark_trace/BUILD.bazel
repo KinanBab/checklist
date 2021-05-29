@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "benchmark_trace_lib",
+    srcs = ["benchmark_trace.go"],
+    importpath = "checklist/cmd/benchmark_trace",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//driver",
+        "//testing",
+    ],
+)
+
+go_binary(
+    name = "benchmark_trace",
+    embed = [":benchmark_trace_lib"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,39 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "pir",
+    srcs = [
+        "crypto_rand.go",
+        "pir.go",
+        "pir_dpf.go",
+        "pir_matrix.go",
+        "pir_non_private.go",
+        "pir_punc.go",
+        "pir_reader.go",
+        "pirtype_enumer.go",
+        "pset.go",
+        "pset_ggm.go",
+        "static_db.go",
+        "test_util.go",
+    ],
+    importpath = "checklist/pir",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//psetggm",
+        "//modules/dpf-go/dpf:dpf",
+        "@com_github_lukechampine_fastxor//:fastxor",
+    ],
+)
+
+go_test(
+    name = "pir_test",
+    srcs = [
+        "pir_test.go",
+        "pset_test.go",
+    ],
+    embed = [":pir"],
+    deps = [
+        "//psetggm",
+        "@tools_gotest//assert",
+    ],
+)

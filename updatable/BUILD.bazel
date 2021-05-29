@@ -1,0 +1,33 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "updatable",
+    srcs = [
+        "pir_updatable.go",
+        "pir_updatable_server.go",
+        "pir_waterfall.go",
+        "rice.go",
+    ],
+    importpath = "checklist/updatable",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pir",
+        "//safebrowsing",
+        "@com_github_elliotchance_orderedmap//:orderedmap",
+    ],
+)
+
+go_test(
+    name = "updatable_test",
+    srcs = [
+        "pir_updatable_test.go",
+        "rice_test.go",
+    ],
+    embed = [":updatable"],
+    deps = [
+        "//pir",
+        "//safebrowsing",
+        "@com_github_golang_protobuf//proto",
+        "@tools_gotest//assert",
+    ],
+)

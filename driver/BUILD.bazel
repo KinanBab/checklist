@@ -1,0 +1,36 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "driver",
+    srcs = [
+        "flags.go",
+        "pir_rpc_proxy.go",
+        "pir_server_driver.go",
+        "profiler.go",
+        "test_util.go",
+        "trace.go",
+        "types.go",
+    ],
+    importpath = "checklist/driver",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pir",
+        "//rpc",
+        "//updatable",
+        "@com_github_ugorji_go_codec//:codec",
+    ],
+)
+
+go_test(
+    name = "driver_test",
+    srcs = ["driver_test.go"],
+    embed = [":driver"],
+    deps = [
+        "//pir",
+        "//rpc",
+        "//safebrowsing",
+        "//updatable",
+        "@com_github_ugorji_go_codec//:codec",
+        "@tools_gotest//assert",
+    ],
+)

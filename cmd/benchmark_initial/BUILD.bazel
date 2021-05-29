@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "benchmark_initial_lib",
+    srcs = ["benchmark_initial.go"],
+    importpath = "checklist/cmd/benchmark_initial",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//driver",
+        "//pir",
+        "//updatable",
+        "@tools_gotest//assert",
+    ],
+)
+
+go_binary(
+    name = "benchmark_initial",
+    embed = [":benchmark_initial_lib"],
+    visibility = ["//visibility:public"],
+)

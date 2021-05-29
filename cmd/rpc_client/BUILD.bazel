@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "rpc_client_lib",
+    srcs = ["rpc_client.go"],
+    importpath = "checklist/cmd/rpc_client",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//driver",
+        "//pir",
+        "//updatable",
+    ],
+)
+
+go_binary(
+    name = "rpc_client",
+    embed = [":rpc_client_lib"],
+    visibility = ["//visibility:public"],
+)

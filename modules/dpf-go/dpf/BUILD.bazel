@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "dpf",
+    srcs = [
+        "aes.go",
+        "aes_amd64.s",
+        "aes_arm64.s",
+        "dpf.go",
+    ],
+    importpath = "github.com/dkales/dpf-go/dpf",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "dpf_test",
+    srcs = ["dpf_test.go"],
+    embed = [":dpf"],
+)

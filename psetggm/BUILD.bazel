@@ -1,0 +1,35 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "psetggm",
+    srcs = [
+        "AES.cpp",
+        "AES.h",
+        "Defines.cpp",
+        "Defines.h",
+        "answer.cpp",
+        "answer.h",
+        "flat_hash_map.hpp",
+        "gsl-lite.hpp",
+        "intrinsics.h",
+        "pset_ggm.cpp",
+        "pset_ggm.h",
+        "pset_ggm_c.go",
+        "sse2neon.h",
+        "xor.cpp",
+        "xor.h",
+    ],
+    cgo = True,
+    clinkopts = ["-lstdc++"],
+    cxxopts = select({
+        "@io_bazel_rules_go//go/platform:amd64": [
+            "-msse2 -msse -march=native -maes -Ofast -std=c++11",
+        ],
+        "@io_bazel_rules_go//go/platform:arm64": [
+            "-march=armv8-a+fp+simd+crypto+crc -Ofast -std=c++11",
+        ],
+        "//conditions:default": [],
+    }),
+    importpath = "checklist/psetggm",
+    visibility = ["//visibility:public"],
+)

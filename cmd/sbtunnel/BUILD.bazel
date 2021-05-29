@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "sbtunnel_lib",
+    srcs = ["sbtunnel.go"],
+    importpath = "checklist/cmd/sbtunnel",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//safebrowsing",
+        "@com_github_golang_protobuf//proto",
+    ],
+)
+
+go_binary(
+    name = "sbtunnel",
+    embed = [":sbtunnel_lib"],
+    visibility = ["//visibility:public"],
+)
