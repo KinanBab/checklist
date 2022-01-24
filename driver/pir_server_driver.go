@@ -134,6 +134,7 @@ func (driver *serverDriver) Answer(q pir.QueryReq, resp *interface{}) (err error
 func (driver *serverDriver) Configure(config TestConfig, none *int) (err error) {
 	driver.config = config
 	driver.updatable = config.Updatable
+	driver.config.MeasureBandwidth = true
 	if config.DataRandSeed > 0 {
 		driver.randSource = rand.New(rand.NewSource(config.DataRandSeed))
 	}

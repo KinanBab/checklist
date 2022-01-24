@@ -7,10 +7,7 @@ TESTS := test_pset test_distinct test_xor
 
 OBJ := $(addsuffix .o,$(basename $(SRC)))
 
-CCFLAGS := -Ofast -I.. -g 
-
-SIMD_FLAGS.x86_64 := -msse2 -msse -march=native -maes
-SIMD_FLAGS.aarch64 := -march=armv8-a+fp+simd+crypto+crc
+CCFLAGS := -I.. -g 
 
 
 uname_p := $(strip $(shell uname -p))

@@ -16,9 +16,12 @@ func MakeRows(src *rand.Rand, nRows, rowLen int) []Row {
 	db := make([]Row, nRows)
 	for i := range db {
 		db[i] = make([]byte, rowLen)
-		src.Read(db[i])
-		db[i][0] = byte(i % 256)
-		db[i][1] = 'A' + byte(i%256)
+		//src.Read(db[i])
+		//db[i][0] = byte(i % 256)
+		//db[i][1] = 'A' + byte(i%256)
+		for j := 0; j < rowLen; j++ {
+  		db[i][j] = byte((i + j) % 256)
+		}
 	}
 	return db
 }
@@ -30,7 +33,7 @@ func MakeDB(nRows int, rowLen int) StaticDB {
 func MakeKeys(src *rand.Rand, nRows int) []uint32 {
 	keys := make([]uint32, nRows)
 	for i := range keys {
-		keys[i] = uint32(src.Int31())
+		keys[i] = uint32(i)
 	}
 	return keys
 }

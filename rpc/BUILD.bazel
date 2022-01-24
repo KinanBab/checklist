@@ -7,6 +7,7 @@ go_library(
         "serialization.go",
         "server.go",
     ],
+    gc_goopts = [ "-N", "-l" ],
     importpath = "checklist/rpc",
     visibility = ["//visibility:public"],
     deps = [

@@ -5,6 +5,7 @@ go_library(
     srcs = ["rpc_server.go"],
     importpath = "checklist/cmd/rpc_server",
     visibility = ["//visibility:private"],
+    gc_goopts = [ "-N", "-l" ],
     deps = [
         "//driver",
         "//rpc",
@@ -16,4 +17,5 @@ go_binary(
     name = "rpc_server",
     embed = [":rpc_server_lib"],
     visibility = ["//visibility:public"],
+    gc_goopts = [ "-N", "-l" ],
 )

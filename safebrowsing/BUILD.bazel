@@ -6,6 +6,7 @@ go_library(
         "hash.go",
         "safebrowsing.pb.go",
     ],
+    gc_goopts = [ "-N", "-l" ],
     importpath = "checklist/safebrowsing",
     visibility = ["//visibility:public"],
     deps = [

@@ -11,6 +11,7 @@ go_library(
         "trace.go",
         "types.go",
     ],
+    gc_goopts = [ "-N", "-l" ],
     importpath = "checklist/driver",
     visibility = ["//visibility:public"],
     deps = [

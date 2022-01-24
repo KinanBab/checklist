@@ -19,14 +19,12 @@ go_library(
         "xor.cpp",
         "xor.h",
     ],
+    gc_goopts = [ "-N", "-l" ],
     cgo = True,
     clinkopts = ["-lstdc++"],
     cxxopts = select({
         "@io_bazel_rules_go//go/platform:amd64": [
-            "-msse2 -msse -march=native -maes -Ofast -std=c++11",
-        ],
-        "@io_bazel_rules_go//go/platform:arm64": [
-            "-march=armv8-a+fp+simd+crypto+crc -Ofast -std=c++11",
+            "-maes -std=c++11",
         ],
         "//conditions:default": [],
     }),
